@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="login-form-div" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="login-form" class="form" action="/user" method="POST">
+                <p class="title">Login</p>
+                <p class="message">Sign in to access your account.</p>
+                <label>
+                    <input id="login-phoneNo" required="" placeholder="" type="tel" class="input" pattern="[0-9]+">
+                    <span>Phone No</span>
+                </label>
+            
+                <label>
+                    <input id="login-password" required="" placeholder="" type="password" class="input">
+                    <span>Password</span>
+                </label>
+                <button class="submit">Login</button>
+                <button id="forgotPasswordbtn" type="button" class="submit"> Forgot Password </button>
+                <p class="signin">Don't have an account? <a href="#">Sign up</a></p>
+            </form>                
+        </div>
+    </div>
+</body>
+</html>
