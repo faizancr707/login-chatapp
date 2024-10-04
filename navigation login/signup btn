@@ -1,0 +1,18 @@
+ <div class="topnav" id="myTopnav">
+            <div class="topnav-left">
+                <a href="">LOGO</a>
+            </div>
+            <div class="topnav-center">
+                <a href="" class="active">Home</a>
+                <a href="">News</a>
+                <a href="">Contact</a>
+                <a href="">About</a>
+            </div>
+            <div class="topnav-right">
+                <button id="login-btn" type="button" class="log"> Login </button>
+                <button id="signUp-btn" type="button" class="reg"> Signup </button>
+            </div>
+            <a href="" class="icon" id="menuIcon">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
