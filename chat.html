@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="styles.css">
+		<title>Chats</title>
+	</head>
+	<body>
+		<main>
+			<!-- Top  Navigation Start   -->
+			<div class="topnav" id="myTopnav">
+				<div class="topnav-left">
+					<button class="openBtn" id="openBtn">Menu</button>
+					<button id="profile-btn" type="button" class="reg"> Profile </button>
+				</div>
+				<div class="topnav-center">
+					<button id="createGroup-btn" type="button" class="log"> Create Group </button>
+					<button id="addContact-btn" type="button" class="log"> Add Contacts </button>
+				</div>
+				<div class="topnav-right">
+					<button id="logout-btn" type="button" class="reg"> LogOut </button>
+				</div>
+				<a href="" class="icon" id="menuIcon">
+					<i class="fa fa-bars"></i>
+				</a>
+			</div>
+			<!-- Side Nav Start  -->
+			<div class="container">
+				<div id="sidepanel" class="sidepanel">
+					<button class="closeBtn" id="closeBtn">&times;</button>
+					<button id="myChats">Chats</button>
+					<button id="myContacts">My Contacts</button>
+					<button id="myInvites"> My Invites </button>
+					<!-- Add more buttons as needed -->
+				</div>
+				<div class="main-content">
+					<button class="reg" id="PersonalTab"> My Personal Chats </button>
+					<button class="reg" id="groupTab">My Group Chats </button>
+					<!-- Chats Display Div Start   -->
+					<div id="chatsSectionDiv" style="display:none">
+						<div class="Chatscontainer">
+							
+							<div class="chats-sidebar" id="chats-sidebar">
+								<!-- Sidebar content for names/groups -->
+								<!-- Example: <div class="contact" data-id="1">Contact Name</div> -->
+							</div>
+							<div class="chat">
+								<div id="chats-header-div" class="chats-header">
+									<!-- Display contact/group name here -->
+									<!-- Example: <div class="chat-title">Contact Name</div> -->
+								</div>
+								<div id="chats-messages-div" class="chats-messages">
+									<!-- Messages will be dynamically loaded here -->
+									<!-- Example: <div class="message">Message content</div> -->
+								</div>
+								<div id="compose-div" class="compose">
+									<!-- <input type="text" placeholder="Type a message"><button class="send-btn">Send</button><input type="file" id="fileInput" multiple style="display: none;"><label for="fileInput" class="attachment-btn">+</label> -->
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Contact Table Start  -->
+					<div id="tableContainerDiv" class="table-container" style="display: none;">
+						<h1>Contact Details</h1>
+						<table id="contactTable">
+							<thead>
+								<tr>
+									<th>First Name</th>
+									<th>Last Name</th>
+									<th>Phone Number</th>
+									<th>Actions</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- Rows will be dynamically populated here -->
+							</tbody>
+						</table>
+					</div>
+					<!-- Contact Table End  -->
+
+					<div id="myInvitesDiv" style="display: none;"></div>
+				</div>
+			</div>
+			<!--- Profile Modal  -->
+			<div class="card modal" id="profile-div">
+				<div class="modal-content">
+					<span class="close">&times;</span>
+					<p class="title">Profile</p>
+					<div class="img"></div>
+					<br>
+					<div style="display: block;">
+						<p class="message" style="display: inline;">Name: </p>
+						<p id="userFirstName" class="message" style="display: inline;">Faizan </p>
+						<p id="userLastName" class="message" style="display: inline;">Alam </p>
+					</div>
+					<div>
+						<p class="message" style="display:inline-block">Phone No: </p>
+						<p id="profile_phoneNo" class="message" style="display:inline;">9999990000</p>
+					</div>
+				</div>
+			</div>
+			<!-- Add Contacts Modal -->
+			<div class="modal" id="addContactDiv">
+				<div class="modal-content">
+					<span class="close"> &times; </span>
+					<form id="addContactForm" action="/" method="post">
+						<p class="title">Add Contact</p>
+						<p class="message"> User Name </p>
+						<div class="flex">
+							<label for="firstName">
+								<span>Firstname</span>
+								<input id="contactFirstName" required="" placeholder="" type="text" class="input">
+							</label>
+							<label for="lastName">
+								<span>Lastname</span>
+								<input id="contactLastName" required="" placeholder="" type="text" class="input">
+							</label>
+						</div>
+						<label for="phoneNo">
+							<span>Phone Number</span>
+							<input id="contactPhoneNo" required="" placeholder="" type="tel" class="input" pattern="[0-9]+">
+						</label>
+						<button id="Contact-Submit-Btn" class="submit">Submit</button>
+					</form>
+				</div>
+			</div>
+      		<!-- Add Groups Modal -->
+			<div class="modal" id="addGroupDiv">
+				<div class="modal-content">
+					<span class="close"> &times; </span>
+					<form id="addGroupForm" action="/" method="post">
+						<p class="title">Add Group</p>
+						<p class="message"> Group Details </p>
+						<div class="flex">
+							<label for="groupName">
+								<span>Group Name</span>
+								<input id="groupName" required="" placeholder="" type="text" class="input">
+							</label>
+						</div>
+						<div id="userContactList"></div>
+						<button id="Group-Submit-Btn" class="submit">Submit</button>
+					</form>
+				</div>
+			</div>
+
+			<!-- Edit Group Modal  -->
+			<div class="modal" id="editGroupDiv">
+				<div class="modal-content">
+					<span class="close"> &times; </span>
+					<p class="title">Edit Group</p>
+					<button class="log" id="editGroupNameBtn"> Edit Group Name</button>
+					<button class="log" id="addGroupMembersBtn"> Add Group Members</button>
+					<button class="log" id="removeGroupMembersBtn"> Remove Grouup members </button>
+					<button class="log" id="addAdminBtn"> Add Admin </button>
+					<button class="log" id="removeAdminBtn"> Remove Admin </button>
+				</div>
+			</div>
+
+			<div class="modal" id="editGroupNameDiv">
+				<div class="modal-content">
+					<span class="close"> &times; </span>
+					<p class="title">Edit Group Name</p>
+					<form id="editGroupNameForm" action="/" method="post">
+						<input id="editGroupNameInput" type="text" placeholder="Enter New Group Name" required> 
+						<button class="submit" id="editGroupNameSubmitBtn" type="submit"> submit </button>
+					</form>
+				</div>
+			</div>
+
+			<div class="modal" id="removeGroupMembersDiv">
+				<div class="modal-content">
+					<span class="close"> &times; </span>
+					<p class="title">Remove Group Members</p>
+					<form id="removeGroupMemberForm" action="/" method="post">
+						<p class="message"> Group Members Details </p>
+						
+						<div id="GroupMemberList"></div>
+						<button id="removeGroupMemberSubmitBtn" class="submit">Submit</button>
+					</form>
+				</div>
+			</div>
+
+			<div class="modal" id="addGroupMembersDiv">
+				<div class="modal-content">
+					<span class="close"> &times; </span>
+					<p class="title">Add Group Members</p>
+					<form id="addGroupMemberForm" action="/" method="post">
+						<p class="message"> Members can be add details </p>
+						
+						<div id="addGroupMemberList"></div>
+						<button id="addGroupMemberSubmitBtn" class="submit">Submit</button>
+					</form>
+				</div>
+			</div>
+
+			
+			<div class="modal" id="addAdminDiv">
+				<div class="modal-content">
+					<span class="close"> &times; </span>
+					<p class="title">Add Admin</p>
+					<form id="addAdminForm" action="/" method="post">
+						<p class="message"> Selected Members will become admin </p>
+						
+						<div id="addAdminList"></div>
+						<button id="addAdminSubmitBtn" class="submit">Submit</button>
+					</form>
+				</div>
+			</div>
+			
+			<div class="modal" id="removeAdminDiv">
+				<div class="modal-content">
+					<span class="close"> &times; </span>
+					<p class="title">Remove Admin</p>
+					<form id="removeAdminForm" action="/" method="post">
+						<p class="message"> Selected Members will be removed from Admin </p>
+						
+						<div id="removeAdminList"></div>
+						<button id="removeAdminSubmitBtn" class="submit">Submit</button>
+					</form>
+				</div>
+			</div>
+
+		</main>
+		
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="socket.js"></script>
+		<script src="script.js"></script>
+		<script src="user.js"></script>
+		<script src="message.js"></script>
+	</body>
+</html>
